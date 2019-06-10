@@ -30,7 +30,7 @@ having avg(c.idade) > 45;
 
 --Q5
 
-with res as (
+with t as (
   select a.cod, a.designacao,
     sum(
       case p.nome
@@ -40,11 +40,12 @@ with res as (
   from autarquia a
   left join candidato using(cod)
   left join partido p using(sigla)
+  group by 1
 )
 
-select res.cod, res.designacao
-from res
-where res.s = 0
+select t.cod, t.designacao
+from t
+where t.s = 0
 order by 1;
 
 --Q6
